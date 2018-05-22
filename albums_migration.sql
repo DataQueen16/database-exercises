@@ -10,5 +10,6 @@ CREATE TABLE IF NOT EXISTS albums(
   sales DECIMAL(10, 2),
   genre VARCHAR(100),
   PRIMARY KEY (id)
-)
+);
 
+#   Test
