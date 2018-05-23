@@ -12,6 +12,7 @@ FROM employees
 WHERE last_name LIKE 'E%'
   AND last_name LIKE '%E';
 
+
 SELECT *
 FROM employees
 WHERE birth_date LIKE '%-12-25'
