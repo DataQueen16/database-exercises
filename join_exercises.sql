@@ -51,3 +51,55 @@ SELECT
   CONCAT(mgmt.first_name, ' ', mgmt.last_name) AS 'Manager'
 FROM employees e
   JOIN
+
+
+SELECT e.first_name, e.last_name, e.birth_date
+FROM dept_manager dm
+JOIN employees e ON dm.emp_no = e.emp_no
+LIMIT 10;
+
+SELECT first_name, last_name, birth_date
+FROM employees
+WHERE emp_no IN (
+  SELECT emp_no
+  FROM dept_manager
+)
+LIMIT 10;
+
+
+-- Codeup records example
+
+SELECT s.name, s.email, s.github_username
+FROM students s
+JOIN cohorts c ON s.cohort_id = c.id
+WHERE c.name = 'Ulysses';
+
+SELECT name, email, github_username
+FROM students
+WHERE cohort_id = (
+  SELECT id FROM cohorts WHERE name = 'Ulysses'
+);
+
+
+-- Who manages the customer service department?
+SELECT
+  CONCAT(e.last_name, ', ', e.first_name) AS name
+FROM employees e
+JOIN dept_manager dm ON dm.emp_no = e.emp_no
+JOIN departments d ON dm.dept_no = d.dept_no
+WHERE d.dept_name = 'Customer Service'
+  AND dm.to_date > now();
+
+
+SELECT first_name, last_name
+FROM employees
+WHERE emp_no = (
+  SELECT *
+  FROM dept_manager
+  WHERE to_date > currdate()
+  AND dept_no = (
+    SELECT * FROM departments
+    WHERE dept_name = 'Customer Service'
+  );
+);
+
