@@ -69,3 +69,4 @@ WHERE emp_no IN (
     FROM salaries
   )
 );
+
